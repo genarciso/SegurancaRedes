@@ -20,9 +20,9 @@ def main():
 
 	fraseBinaria = []
 	# Pegar a tripla de pixeis
-	sair = True
+
 	contador = 0
-	while sair: 
+	while True: 
 		parteLetra = ""
 		r, g, b = imagemBinario[contador]
 		contador+=1 
@@ -37,7 +37,7 @@ def main():
 		parteLetra = parteLetra[::-1]
 
 		if (parteLetra == '00000011'):
-			sair = False
+			break
 		else :
 			fraseBinaria.append(parteLetra)
 	
