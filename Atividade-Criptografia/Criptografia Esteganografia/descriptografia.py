@@ -26,13 +26,15 @@ def main():
 		parteLetra = ""
 		r, g, b = imagemBinario[contador]
 		contador+=1 
-		parteLetra = g[-1:]+b[-1:]
+		parteLetra = r[-1:]+g[-1:]+b[-1:]
 		r, g, b = imagemBinario[contador]
 		contador+=1 
 		parteLetra += r[-1:]+g[-1:]+b[-1:]
 		r, g, b = imagemBinario[contador]
 		contador+=1 
-		parteLetra += r[-1:]+g[-1:]+b[-1:]
+		parteLetra += r[-1:]+g[-1:]
+
+		parteLetra = parteLetra[::-1]
 
 		if (parteLetra == '00000011'):
 			sair = False

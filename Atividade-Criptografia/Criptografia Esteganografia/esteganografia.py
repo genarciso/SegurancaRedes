@@ -28,11 +28,17 @@ def main():
 	fraseBinario = tranformarFraseBinario(frase)
 
 	img = Image.open("LAND2.BMP").convert("RGB")
+
+	if (img.size[0] * img.size[1] / 3 < len(frase)) :
+		print ("Não é possível encriptar essa frase, ela é muito grande")
+		return
+
 	listaRGB = list(img.getdata())
 	img.close()
 	imagemBinario = transformarImagemRGBBinario(listaRGB)
 
 	for indiceLetra, letraBinario in enumerate(fraseBinario):
+		letraBinario = letraBinario[::-1]
 		contadorPixel = 0
 		# Escrita na primeira tripla 
 		r, g, b = imagemBinario[indiceLetra*3]
@@ -66,23 +72,13 @@ def main():
 
 	indiceLetra = len(fraseBinario)
 	r, g, b = imagemBinario[indiceLetra*3]
-	r = r[:-1] + '0' 
-	g = g[:-1] + '0'
-	b = b[:-1] + '0'
-	imagemBinario[indiceLetra*3] = (r,g,b)
+	imagemBinario[indiceLetra*3] = (r[:-1] + '1', g[:-1] + '1', b[:-1] + '0')
 
 	r, g, b = imagemBinario[(indiceLetra*3) + 1]
-	r = r[:-1] + '0'
-	g = g[:-1] + '0'
-	b = b[:-1] + '0'
-	imagemBinario[(indiceLetra*3) + 1] = (r,g,b)
+	imagemBinario[(indiceLetra*3) + 1] = (r[:-1] + '0', g[:-1] + '0', b[:-1] + '0')
 
 	r, g, b = imagemBinario[(indiceLetra*3) + 2]
-	r = r[:-1] + '0'
-	g = g[:-1] + '1'
-	b = b[:-1] + '1'
-
-	imagemBinario[(indiceLetra*3) + 2] = (r,g,b)	
+	imagemBinario[(indiceLetra*3) + 2] = (r[:-1] + '0', g[:-1] + '0', b[:-1] + '0')	
 
 	imagemBinario = transformarBinarioImagemRGB(imagemBinario)
 	img = Image.new("RGB", (1024,768))
